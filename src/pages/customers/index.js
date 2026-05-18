@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { Table, Spinner, Badge, Form, Row, Col } from "react-bootstrap";
+import { Table, Spinner, Badge, Form, Row, Col, Button, Modal } from "react-bootstrap";
+import { Eye } from "react-bootstrap-icons";
 import { toast } from "react-toastify";
 
 const CustomersAdmin = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
 
   useEffect(() => {
     fetchCustomers();
@@ -45,6 +48,16 @@ const CustomersAdmin = () => {
 
   const displayCustomers = getFilteredCustomers();
 
+  const handleOpenModal = (customer) => {
+    setSelectedCustomer(customer);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedCustomer(null);
+  };
+
   return (
     <>
       <Head>
@@ -81,6 +94,7 @@ const CustomersAdmin = () => {
                 <th>Role</th>
                 <th>Joined Date</th>
                 <th>Last Sign In</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -102,11 +116,16 @@ const CustomersAdmin = () => {
                       ? new Date(customer.last_sign_in_at).toLocaleDateString()
                       : "Never"}
                   </td>
+                  <td>
+                    <Button variant="outline-info" size="sm" onClick={() => handleOpenModal(customer)}>
+                      <Eye className="me-1" /> Addresses
+                    </Button>
+                  </td>
                 </tr>
               ))}
               {displayCustomers.length === 0 && (
                 <tr>
-                  <td colSpan="6" className="text-center text-muted py-3">
+                  <td colSpan="7" className="text-center text-muted py-3">
                     No customers found matching your criteria.
                   </td>
                 </tr>
@@ -115,6 +134,30 @@ const CustomersAdmin = () => {
           </Table>
         </div>
       )}
+
+      <Modal show={showModal} onHide={handleCloseModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Addresses for {selectedCustomer?.user_metadata?.full_name || selectedCustomer?.address_name || selectedCustomer?.email}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedCustomer?.addresses && selectedCustomer.addresses.length > 0 ? (
+            <div className="d-flex flex-column gap-3">
+              {selectedCustomer.addresses.map(addr => (
+                <div key={addr.id} className="p-3 border rounded shadow-sm bg-light">
+                  <h6 className="fw-bold mb-1">{addr.full_name}</h6>
+                  <p className="mb-2 text-muted small"><i className="bi bi-telephone-fill"></i> {addr.phone_number}</p>
+                  <p className="mb-0">
+                    {addr.address_line},<br/>
+                    {addr.city}, {addr.state} - <strong>{addr.pincode}</strong>
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-muted text-center my-4">No addresses found for this customer.</p>
+          )}
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

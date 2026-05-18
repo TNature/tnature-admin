@@ -18,23 +18,25 @@ export default async function handler(req, res) {
 
     if (usersError) throw usersError;
 
-    // Fetch addresses to get names and phone numbers
+    // Fetch addresses to get full details
     const { data: addresses, error: addressesError } = await supabaseAdmin
       .from('addresses')
-      .select('user_id, full_name, phone_number')
+      .select('*')
       .order('created_at', { ascending: false });
       
     if (addressesError) throw addressesError;
 
     // Map addresses to users
     const usersWithAddresses = users.map(user => {
-      // Find the most recent address for this user
-      const userAddress = addresses.find(addr => addr.user_id === user.id);
+      // Find all addresses for this user
+      const userAddresses = addresses.filter(addr => addr.user_id === user.id);
+      const mainAddress = userAddresses.length > 0 ? userAddresses[0] : null;
       
       return {
         ...user,
-        address_name: userAddress?.full_name || null,
-        phone_number: userAddress?.phone_number || null
+        address_name: mainAddress?.full_name || null,
+        phone_number: mainAddress?.phone_number || null,
+        addresses: userAddresses
       };
     });
 
