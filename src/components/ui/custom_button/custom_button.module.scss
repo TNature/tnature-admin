@@ -1,0 +1,28 @@
+.CustomButton {
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 1px;
+
+  &.v1 {
+    background-color: $color_1;
+    color: white;
+
+    &:hover {
+      background-color: white;
+      color: $color_1;
+    }
+  }
+
+  &.v2 {
+    background-color: white;
+    color: $color_1;
+
+    &:hover {
+      background-color: $color_1;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "tnature-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.105.4",
+    "@vercel/analytics": "^2.0.1",
+    "aos": "^2.3.4",
+    "bootstrap": "^5.2.3",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "next": "13.3.0",
+    "nprogress": "^0.2.0",
+    "react": "18.2.0",
+    "react-bootstrap": "^2.7.4",
+    "react-bootstrap-icons": "^1.10.3",
+    "react-dom": "18.2.0",
+    "react-loading-skeleton": "^3.3.1",
+    "react-toastify": "^11.0.5",
+    "sass": "^1.89.1",
+    "uuid": "^10.0.0"
+  }
+}

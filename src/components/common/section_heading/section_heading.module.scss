@@ -1,0 +1,50 @@
+.SectionHeading {
+  // text-align: center;
+  margin-bottom: 40px;
+
+  p {
+    font-size: 20px;
+    color: $color_1;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 8px;
+    // font-weight: 500;
+  }
+
+  h2 {
+    font-size: 35px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: $color_primary_1;
+  }
+
+  &.v2 {
+    p {
+      color: $color_b1;
+    }
+
+    h2 {
+      color: red;
+    }
+  }
+
+  &.v3 {
+    p {
+      color: $color_b1;
+    }
+
+    h2 {
+      color: $color_1;
+    }
+  }
+
+  @include respond-below(md) {
+    p {
+      font-size: 18px;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+@import "@/styles/scss/variables";
+
+.LegalPage {
+  padding: 80px 0;
+  background-color: #fff;
+  min-height: 80vh;
+
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+    color: #444;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: $color_primary_1;
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 15px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background-color: $color_primary_1;
+        border-radius: 2px;
+      }
+    }
+
+    section {
+      margin-bottom: 35px;
+
+      h2, h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 15px;
+      }
+
+      p {
+        margin-bottom: 15px;
+        font-size: 1.05rem;
+        text-align: justify;
+      }
+
+      ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+
+        li {
+          margin-bottom: 10px;
+          position: relative;
+          list-style: disc;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .LegalPage {
+    padding: 40px 0;
+
+    .content {
+      h1 {
+        font-size: 2rem;
+      }
+
+      section {
+        h2, h3 {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
