@@ -36,6 +36,8 @@ export const AuthProvider = ({ children }) => {
       options: {
         data: {
           full_name: fullName,
+          name: fullName,
+          role: "customer" // default role, since super-admin requires direct db update
         },
       },
     });

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
 import styles from "./AdminLayout.module.scss";
 import { House, BoxSeam, Tags, ReceiptCutoff, BoxArrowRight, People, List } from "react-bootstrap-icons";
+import Logo from "@/components/common/logo/logo";
 
 const AdminLayout = ({ children }) => {
   const { user, signOut } = useAuth();
@@ -30,12 +31,14 @@ const AdminLayout = ({ children }) => {
     <div className={styles.adminLayout}>
       {isSidebarOpen && <div className={styles.overlay} onClick={closeSidebar}></div>}
       <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}>
-        <div className={styles.sidebarHeader}>TNature Admin</div>
+        <div className={styles.sidebarHeader}>
+          <Logo width={160} />
+        </div>
         <nav className={styles.navLinks}>
           {navItems.map((item) => (
-            <Link 
-              key={item.path} 
-              href={item.path} 
+            <Link
+              key={item.path}
+              href={item.path}
               className={router.pathname === item.path ? styles.active : ""}
               onClick={closeSidebar}
             >

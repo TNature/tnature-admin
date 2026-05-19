@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { Spinner } from "react-bootstrap";
 import { supabase } from "@/utils/supabase";
+import Logo from "@/components/common/logo/logo";
 
 const AuthScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -59,8 +60,11 @@ const AuthScreen = () => {
             <Col lg={6} className={styles.formCol}>
               <div className={styles.formContent}>
                 <div className={styles.formHeader}>
-                  <h2>TNature Admin Login</h2>
-                  <p>Please enter your credentials to manage the platform.</p>
+                  <div className="mb-4 text-center">
+                    <Logo width={180} />
+                  </div>
+
+                  <p className="text-center">Please enter your credentials to manage the platform.</p>
                 </div>
 
                 <Form className={styles.form} onSubmit={handleSubmit}>
